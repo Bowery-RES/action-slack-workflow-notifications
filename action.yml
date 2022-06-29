@@ -16,6 +16,9 @@ inputs:
   channel-id:
     description: ChannelId to post a message
 
+  thread-ts:
+    description: "The timestamp on the message to reply to"
+
   ignore-steps:
     description: Comma separated list of step names to ignore
     default: Set up job, Complete job

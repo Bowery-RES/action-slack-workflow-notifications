@@ -2,6 +2,7 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
 const { IncomingWebhook } = require("@slack/webhook");
+const { WebClient } = require("@slack/web-api");
 
 // libraries
 const message = require("./lib/message");
@@ -18,6 +19,7 @@ const inputs = {
       .map(Function.prototype.call, String.prototype.trim),
   },
   channelId: core.getInput("channel-id", { required: true }),
+  threadTs: core.getInput("thread-ts"),
 };
 
 // error handler
@@ -93,14 +95,15 @@ async function main() {
     if (blocks) {
       // post message
       webResponse = await web.chat.postMessage({
-        channel: channelId,
+        channel: inputs.channelId,
         text: message,
-        ...(blocks || {}),
+        blocks,
+        thread_ts: inputs.threadTs,
       });
     } else {
       console.log(
         "Missing blocks! Did not send a message via chat.postMessage with botToken",
-        { channel: channelId, text: message, ...blocks }
+        { channel: inputs.channelId, text: message, ...blocks }
       );
       throw new Error(
         "Missing message content, please input a valid payload or message to send. No Message has been send."

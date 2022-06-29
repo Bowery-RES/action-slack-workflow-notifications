@@ -9,8 +9,10 @@ LABEL com.github.actions.name="GitHub Slack Workflow Notifications" \
 RUN mkdir /action
 WORKDIR /action
 
-COPY action ./
+COPY action/package*.json ./
 
 RUN npm ci --only=prod
+COPY action ./
+
 
 ENTRYPOINT ["node", "/action/index.js"]
