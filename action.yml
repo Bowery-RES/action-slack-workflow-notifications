@@ -10,10 +10,6 @@ inputs:
     description: The GitHub token used to update the pull-request
     default: ${{ github.token }}
 
-  slack-webhook:
-    description: A Slack Webhook URL
-    required: true
-
   ignore-jobs:
     description: Comma separated list of job names to ignore
 
