@@ -17,10 +17,12 @@ inputs:
   ignore-jobs:
     description: Comma separated list of job names to ignore
 
+  channel-id:
+    description: ChannelId to post a message
+
   ignore-steps:
     description: Comma separated list of step names to ignore
-    default:  Set up job, Complete job
-
+    default: Set up job, Complete job
 
 runs:
   using: docker
